@@ -19,4 +19,14 @@ describe('AppController', () => {
       expect(appController.getHello()).toBe('Hello World!');
     });
   });
+
+  describe('store-poll', () => {
+    it('should return "this is a poll"', () => {
+      const inputData = {
+        title: "this is a poll",
+        options: ["option A", "option B"]
+      }
+      expect(appController.storePoll(inputData)).toBe('this is a poll');
+    });
+  });
 });
