@@ -1,5 +1,6 @@
-import { createPoll } from '../../calls/calls.js';
+import { CORS_ROOT, createPoll } from '../../calls/calls.js';
 import Poll from '../Poll/Poll.vue';
+import { useRouter } from 'vue-router';
 
 export default {
     name: "MakePoll",
@@ -10,8 +11,12 @@ export default {
             pollData: {
                 title: "",
                 options: []
-            }
+            },
+            link: ""
         }
+    },
+    mounted() {
+        this.router = useRouter();
     },
     methods: {
         createEmptyPoll() {
@@ -27,7 +32,10 @@ export default {
                 alert("You need a title and at least 2 options to publish a poll.");
                 return;
             } else {
-                createPoll(this.pollData);
+                createPoll(this.pollData).then(response => {
+                    console.log(response)
+                    this.link = CORS_ROOT + response.link;
+                });
             }
         },
         updateTitle(newTitle) {
@@ -41,6 +49,12 @@ export default {
         },
         updateOption(key, value) {
             this.pollData.options[Number(key)] = {option: value, votes: 0};
+        },
+        copyLink() {
+            const path = this.router.currentRoute;
+            console.log(path);
+            navigator.clipboard.writeText(this.link);
+            alert("Copied the text: " + this.link);
         },
         check() {
             console.log('check this is all working');

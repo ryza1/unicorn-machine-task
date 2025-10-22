@@ -1,4 +1,5 @@
-const api = "http://[::1]:5000/api";
+export const CORS_ROOT = "http://[::1]:5000/";
+const api = CORS_ROOT + "api";
 
 
 export const getPoll = async (pollId) => {
@@ -50,14 +51,14 @@ export const createPoll = async (formData) => {
   console.log(formData);
     //make request to backend to store this.
     const storeURL = api + '/store-poll';
-    const response = await new Promise( (resolve) => {
+    return await new Promise( (resolve) => {
         const newRequest = new XMLHttpRequest();
         newRequest.open("POST", storeURL, true);
         newRequest.responseType = "json";
         newRequest.setRequestHeader("Content-Type", "application/json")
         newRequest.onload = (value) => {
-            if (value.target.status === 200) {
-                resolve(true);
+            if (value.target.status === 201) {
+                resolve(value.target.response);
             } else {
                 resolve(false);
             }
@@ -67,7 +68,6 @@ export const createPoll = async (formData) => {
         }
         newRequest.send(JSON.stringify(formData));
     });
-    console.log(response)
 }
 
 export const getPollResults = (pollId) => {
