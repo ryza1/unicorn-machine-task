@@ -37,10 +37,10 @@ export default {
             return (this.pollData.title !== "" && this.pollData.options.length > 1) ? "display: block" : "display: none";
         },
         addEmptyPollOption() {
-            this.pollData.options.push("");
+            this.pollData.options.push({option: "", votes: 0});
         },
         updateOption(key, value) {
-            this.pollData.options[Number(key)] = value;
+            this.pollData.options[Number(key)] = {option: value, votes: 0};
         },
         check() {
             console.log('check this is all working');
