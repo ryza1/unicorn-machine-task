@@ -17,6 +17,7 @@ export default {
                 options: [],
                 locked: false
             },
+            showResults: false,
             optionsUnsorted: {}
         }
     },
@@ -37,6 +38,11 @@ export default {
         })
     },
     methods: {
+        showResults() {
+            if (localStorage.getItem("voted" + "_"  + this.uniquePollId)) {
+                this.showResults = true;
+            }
+        },
         submitVote(value) {
             if (localStorage.getItem("voted" + "_"  + this.uniquePollId)) {
                 alert("already voted");
