@@ -21,17 +21,17 @@ export class AppService {
   }
 
 
-  votePoll(data: {poll_id: string, key: number}): string {
+  votePoll(data: {poll_id: string, key: number}): PollInterface {
     console.log(fakeDatabaseJson, fakeDatabaseJson[data.poll_id]);
     fakeDatabaseJson[data.poll_id].options[data.key].votes = fakeDatabaseJson[data.poll_id].options[data.key].votes + 1;
 
     console.log(fakeDatabaseJson[data.poll_id]);
 
-    return data.poll_id;
+    return fakeDatabaseJson[data.poll_id];
   }
 
 
-  storePoll(data: {title: string, options: string[]}): string {
+  storePoll(data: {title: string, options: string[]}): {link: string} {
     //validation needed
     
     let options = {};
@@ -48,11 +48,15 @@ export class AppService {
     }
     //generate the key and link. use the link queryparam as key to JSONDB
     //organisation needed as I don't want to oop through an array.
-    const newField = (data?.title.split(" ").join(''))?.toLowerCase() ?? "randomString";
+    const uniqId = (data?.title.split(" ").join(''))?.toLowerCase() + Math.floor(Math.random()*1000);
+    const newField = uniqId ?? "randomString";
     fakeDatabaseJson[newField] = newPoll;
     console.log(fakeDatabaseJson);
     console.log(JSON.stringify(fakeDatabaseJson[newField]));
-    return data?.title;
+    const shareableUrl = "poll/" +uniqId;
+    return {
+      link: shareableUrl
+    };
   }
   getPoll(poll_id: number): PollInterface {
     const result = fakeDatabaseJson[poll_id];

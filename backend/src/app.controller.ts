@@ -21,7 +21,7 @@ export class AppController {
   }
 
   @Post('vote-poll')
-  votePoll(@Body() body: {poll_id: string, key: number}) {
+  votePoll(@Body() body: {poll_id: string, key: number}): any {
     return this.appService.votePoll((body));
   }
 
