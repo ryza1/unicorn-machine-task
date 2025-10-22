@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body} from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -11,8 +11,8 @@ export class AppController {
   }
 
   @Post('store-poll')
-  storePoll(data: {title: String, options: String[]}) {
-    return this.appService.storePoll(data)
+  async storePoll(@Body() body: {title: string, options: string[]}) {
+    return this.appService.storePoll((body));
   }
 
 }
