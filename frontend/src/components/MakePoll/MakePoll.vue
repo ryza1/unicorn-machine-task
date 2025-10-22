@@ -8,7 +8,7 @@
         /> 
         <br>
         <div :style="this.readyToPublish()" class="button" @click="this?.publishPoll()">Publish Poll</div>
-        <div @click=this.copyLink()>{{this.link}}</div>
+        <div v-if="this.link !== ''" class="button" style="margin-top: 3em;" @click=this.copyLink()>{{this.link}}</div>
     </div>    
 </template>
 <script src="./make-poll.js" />

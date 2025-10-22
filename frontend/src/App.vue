@@ -28,12 +28,18 @@ header {
   display: block;
   margin: 0 auto 2rem;
 }
-
+.form-holder {
+  width: 100%;
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
 .button {
   border: 2px white solid;
-  border-radius: 1rem;
-  padding: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   margin: auto;
+  max-width: 50%;
 }
 
 nav {

@@ -1,22 +1,21 @@
 <template>
     
-    <div v-if=this.editable>
-        editable
-        <div>
+    <div class="form-holder" v-if=this.editable>
+        <div style="justify-content: center;">
             <label for="title">Title</label>
-            <textarea id="title" name="title" rows="1" @input="value = this.updateTitle($event.target.value)"></textarea>
+            <textarea style="width: 100%; font-size: 1.2rem;" id="title" name="title" rows="1" @input="value = this.updateTitle($event.target.value)"></textarea>
         </div>
         <ul>
             <li v-for="(item, key) in this.options" :key="key">
-                <label for="poll_option">Poll option</label>
-                <textarea id="poll_option" name="poll_option" rows="2" :value=item.option @input="value = this.updateOption(key, $event.target.value)"></textarea>
+                <div><label  for="poll_option">Poll option {{key+1}}</label></div>
+                <textarea style="width: 80%; margin: 0.5rem;" id="poll_option" name="poll_option" rows="2" :value=item.option @input="value = this.updateOption(key, $event.target.value)"></textarea>
             </li>
         </ul>
     <div class="button" @click=this.addOption()>Add Option</div>
     </div>
 
     
-    <div v-if=!this.editable>
+    <div class="form-holder" v-if=!this.editable>
         <fieldset>
             <legend>{{this.title}}</legend>
              <div v-for="(item, key) in this.options" :key="key">
