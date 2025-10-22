@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MakePollView from '../views/MakePollView.vue'
+import PollView from '../views/PollView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/poll:unique',
+      path: '/poll/:pollId',
       name: 'poll',
-      component: MakePollView, //Poll
+      component: PollView,
     },
     {
       path: '/make-poll',
