@@ -1,4 +1,4 @@
-const api = process.env.API_URL ?? "http://[::1]:5000/api";
+const api = "http://[::1]:5000/api";
 
 export const createPoll = async (formData) => {
   console.log(formData);

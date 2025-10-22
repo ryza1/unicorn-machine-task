@@ -1,13 +1,15 @@
 import { createPoll } from '../../calls/calls.js';
+import Poll from '../Poll/Poll.vue';
 
 export default {
     name: "MakePoll",
+    components: { Poll },
     data() {
         return {
-            pollEditor: false,
+            pollEditor: true,
             pollData: {
-                title: "ok",
-                options: ["go team go", "option B I guess"]
+                title: "",
+                options: []
             }
         }
     },
@@ -27,6 +29,18 @@ export default {
             } else {
                 createPoll(this.pollData);
             }
+        },
+        updateTitle(newTitle) {
+            this.pollData.title = newTitle;
+        },
+        readyToPublish() {
+            return (this.pollData.title !== "" && this.pollData.options.length > 1) ? "display: block" : "display: none";
+        },
+        addEmptyPollOption() {
+            this.pollData.options.push("");
+        },
+        updateOption(key, value) {
+            this.pollData.options[Number(key)] = value;
         },
         check() {
             console.log('check this is all working');
