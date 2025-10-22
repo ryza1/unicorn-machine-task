@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-ignore
 import MakePoll from '../components/MakePoll/MakePoll.vue'
 </script>
 
